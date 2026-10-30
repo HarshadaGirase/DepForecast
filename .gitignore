@@ -1,0 +1,33 @@
+# Secrets and tokens (SPEC §15)
+.env
+.env.*
+
+# Model weights (TabPFN, Ollama/Gemma)
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.gguf
+
+# Caches (HTTP cache, TabPFN weights)
+.cache/
+tabpfn_cache/
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
