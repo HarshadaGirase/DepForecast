@@ -1,0 +1,49 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "depforecast"
+version = "0.1.0"
+description = "A weather forecast for your dependencies: predicts which npm dependencies are likely to be abandoned in the next 12 months."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+dependencies = [
+    "typer>=0.27,<1",
+    "rich>=15,<16",
+    "pydantic>=2.14,<3",
+    "httpx>=0.28,<1",
+    "python-dotenv>=1.0,<2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "ruff>=0.8",
+    "mypy>=1.13",
+    "respx>=0.22",
+]
+
+[project.scripts]
+depforecast = "depforecast.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["depforecast"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+plugins = ["pydantic.mypy"]
+files = ["depforecast"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
