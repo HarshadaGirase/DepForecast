@@ -78,3 +78,4 @@ Source of truth: `SPEC.md`. This file breaks the milestones into tasks and lists
 - **D4: CLI threshold.** Chosen on Window A only (never on B), saved as the default, and reported in `reports/backtest.md`. It can be overridden with `--threshold`.
 - **D5: GitHub remote.** The user pushes the repo to GitHub (needed for M6).
 - **D6: tokens.** `GITHUB_TOKEN` and `TABPFN_TOKEN` (plus `TABPFN_NO_BROWSER=1`) live in `.env`, which is gitignored. The TabPFN license is accepted at platform.priorlabs.ai/account/licenses; the key comes from /account/api-keys.
+- **D7: no paid services.** Only free or local tools: the GitHub API (personal token), the npm registry, TabPFN weights run locally, Gemma via local Ollama, and GitHub Actions on a public repo. The optional hosted TabPFN-3.5-Thinking run (SPEC §6) is **dropped**.
