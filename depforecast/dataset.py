@@ -1,7 +1,9 @@
 """Developer-only dataset builder: python -m depforecast.dataset."""
 
+import csv
 import json
-from collections import Counter
+from collections import Counter, defaultdict
+from dataclasses import asdict, dataclass
 from datetime import UTC, date, datetime
 from itertools import zip_longest
 from pathlib import Path
@@ -14,9 +16,10 @@ from depforecast.collectors.cache import HttpCache
 from depforecast.collectors.github import BATCH_SIZE, GitHubClient
 from depforecast.collectors.http import HttpClient
 from depforecast.collectors.leakage import assert_no_leakage
+from depforecast.collectors.npm import fetch_package
 from depforecast.config import load_settings
 from depforecast.manifest import parse_package_json
-from depforecast.models import Dependency
+from depforecast.models import Dependency, NpmPackage
 
 # SPEC §5.2. Outcome windows are the 12 months after each T0.
 WINDOW_A_T0 = datetime(2024, 10, 1, tzinfo=UTC)
@@ -35,9 +38,10 @@ def main() -> None:
     """Build the DepForecast dataset (developer only)."""
 
 
-def _client() -> GitHubClient:
+def _clients() -> tuple[HttpClient, GitHubClient]:
     settings = load_settings()
-    return GitHubClient(HttpClient(HttpCache(settings.cache_dir)), settings.github_token)
+    http = HttpClient(HttpCache(settings.cache_dir))
+    return http, GitHubClient(http, settings.github_token)
 
 
 def search_top_repos(
@@ -130,7 +134,7 @@ def seeds(
     out: Path = typer.Option(DATA_DIR / "seed_repos.txt", help="Where to write the list."),
 ) -> None:
     """Pick seed repos (SPEC §5.1) and write data/seed_repos.txt."""
-    gh = _client()
+    _, gh = _clients()
     ranked = [
         search_top_repos(gh, lang, candidates, WINDOW_A_T0.date()) for lang in SEED_LANGUAGES
     ]
@@ -168,6 +172,131 @@ def seeds(
     for reason, count in skipped.most_common():
         console.print(f"  skipped {count}: {reason}")
     console.print("  first 10: " + ", ".join(chosen[:10]))
+
+
+# --- universe ----------------------------------------------------------------------
+
+EXCLUDED_SCOPES = ("@types/",)  # DefinitelyTyped: thousands of packages, one repo (D2)
+
+
+@dataclass(frozen=True)
+class UniverseRow:
+    repo: str
+    package: str
+    """Representative package: the one used by the most seeds (D2)."""
+    n_seeds: int
+    """Seeds whose package.json at Window A's T0 lists the representative package."""
+    repo_packages: int
+    """How many universe packages map to this repo (monorepos > 1)."""
+    other_packages: str
+
+
+def seed_usage(manifests: dict[str, list[Dependency] | None]) -> Counter[str]:
+    """How many seeds depend on each package (each seed counts once per package)."""
+    usage: Counter[str] = Counter()
+    for deps in manifests.values():
+        usage.update({d.name for d in deps or []})
+    return usage
+
+
+def build_universe(
+    usage: Counter[str], packages: dict[str, NpmPackage | None | Exception]
+) -> tuple[list[UniverseRow], Counter[str]]:
+    """Resolve packages to GitHub repos and collapse monorepos to one row per repo."""
+    skipped: Counter[str] = Counter()
+    by_repo: dict[str, list[str]] = defaultdict(list)
+    for name in usage:
+        if name.startswith(EXCLUDED_SCOPES):
+            skipped["excluded scope (@types/*)"] += 1
+            continue
+        pkg = packages.get(name)
+        if isinstance(pkg, Exception):
+            skipped["npm request failed"] += 1
+        elif pkg is None:
+            skipped["not found on npm"] += 1
+        elif not pkg.repo_url:
+            skipped["no repository field"] += 1
+        elif not pkg.repo:
+            skipped["repository not on GitHub"] += 1
+        else:
+            by_repo[pkg.repo].append(name)
+
+    rows = []
+    for repo, names in by_repo.items():
+        names.sort(key=lambda n: (-usage[n], n))
+        rows.append(
+            UniverseRow(
+                repo=repo,
+                package=names[0],
+                n_seeds=usage[names[0]],
+                repo_packages=len(names),
+                other_packages=";".join(names[1:]),
+            )
+        )
+    rows.sort(key=lambda r: (-r.n_seeds, r.repo))
+    return rows, skipped
+
+
+def write_universe(path: Path, rows: list[UniverseRow]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", newline="", encoding="utf-8") as fh:
+        writer = csv.DictWriter(fh, fieldnames=list(UniverseRow.__dataclass_fields__))
+        writer.writeheader()
+        writer.writerows(asdict(r) for r in rows)
+
+
+def read_universe(path: Path) -> list[UniverseRow]:
+    with path.open(newline="", encoding="utf-8") as fh:
+        return [
+            UniverseRow(
+                repo=r["repo"],
+                package=r["package"],
+                n_seeds=int(r["n_seeds"]),
+                repo_packages=int(r["repo_packages"]),
+                other_packages=r["other_packages"],
+            )
+            for r in csv.DictReader(fh)
+        ]
+
+
+@app.command()
+def universe(
+    seeds_file: Path = typer.Option(DATA_DIR / "seed_repos.txt", help="Seed list to read."),
+    out: Path = typer.Option(DATA_DIR / "universe.csv", help="Where to write the universe."),
+) -> None:
+    """Union of seed dependencies, resolved to GitHub, one row per repo (SPEC §5.1, D2)."""
+    http, gh = _clients()
+    seeds_list = read_seeds(seeds_file)
+    usage = seed_usage(manifests_at(gh, seeds_list, WINDOW_A_T0))
+    console.print(f"{len(seeds_list)} seeds -> {len(usage)} distinct direct dependencies")
+
+    names = [n for n, _ in usage.most_common() if not n.startswith(EXCLUDED_SCOPES)]
+    packages: dict[str, NpmPackage | None | Exception] = {}
+    for i, name in enumerate(names, 1):
+        try:
+            packages[name] = fetch_package(http, name)
+        except Exception as exc:  # one bad package never stops the build
+            packages[name] = exc
+        if i % 250 == 0 or i == len(names):
+            console.print(f"  npm: {i}/{len(names)}")
+
+    rows, skipped = build_universe(usage, packages)
+    write_universe(out, rows)
+    summary = {
+        "generated": f"{datetime.now(UTC):%Y-%m-%d}",
+        "seeds": len(seeds_list),
+        "distinct_dependencies": len(usage),
+        "github_packages": sum(r.repo_packages for r in rows),
+        "repos": len(rows),
+        "monorepos": sum(1 for r in rows if r.repo_packages > 1),
+        "skipped": dict(skipped.most_common()),
+    }
+    out.with_name("universe_summary.json").write_text(json.dumps(summary, indent=2) + "\n")
+
+    console.print(f"kept {len(rows)} repos -> {out}")
+    console.print(json.dumps(summary, indent=2))
+    top = ", ".join(f"{r.package} ({r.n_seeds})" for r in rows[:10])
+    console.print(f"  top 10 by seed usage: {top}")
 
 
 if __name__ == "__main__":
