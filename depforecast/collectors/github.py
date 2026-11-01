@@ -10,6 +10,7 @@ from datetime import datetime, timedelta
 from typing import Any
 
 from depforecast.collectors.http import HttpClient, Response
+from depforecast.collectors.leakage import assert_no_leakage
 from depforecast.models import RepoActivity, RepoOutcome
 
 GRAPHQL_URL = "https://api.github.com/graphql"
@@ -224,9 +225,11 @@ class GitHubClient:
         for i in range(0, len(repos), BATCH_SIZE):
             batch = repos[i : i + BATCH_SIZE]
             aliases = [f"r{j}" for j in range(len(batch))]
-            data = self.graphql(
-                _wrap(activity_query_part(a, r, as_of) for a, r in zip(aliases, batch, strict=True))
+            query = _wrap(
+                activity_query_part(a, r, as_of) for a, r in zip(aliases, batch, strict=True)
             )
+            assert_no_leakage(query, as_of)
+            data = self.graphql(query)
             for alias, repo in zip(aliases, batch, strict=True):
                 out[repo] = parse_activity(data, alias, repo, as_of)
         return out
