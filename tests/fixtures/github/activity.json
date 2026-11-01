@@ -1,0 +1,922 @@
+{
+ "data": {
+  "r0": {
+   "archivedAt": null,
+   "createdAt": "2009-06-26T18:56:01Z",
+   "defaultBranchRef": {
+    "target": {
+     "authors": {
+      "nodes": [
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "jonchurch"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "blakeembrey"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "ctcpip"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "UlisesGascon"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "UlisesGascon"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "UlisesGascon"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "UlisesGascon"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "ctcpip"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "jonchurch"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "blakeembrey"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "IamLizu"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "carpasse"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "RobinTail"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "RobinTail"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "IamLizu"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "blakeembrey"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "UlisesGascon"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "bjohansebas"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "carpasse"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "carpasse"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "ctcpip"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "ctcpip"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "ctcpip"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "jonchurch"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "ctcpip"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "UlisesGascon"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "almic"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "jonchurch"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "UlisesGascon"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "jonchurch"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "ctcpip"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "ctcpip"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "IamLizu"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "jonchurch"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "ctcpip"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "jonchurch"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "jonchurch"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "ctcpip"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "UlisesGascon"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "blakeembrey"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "blakeembrey"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "mertcanaltin"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "mertcanaltin"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "jonchurch"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "jonchurch"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "blakeembrey"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "EvanHahn"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "EvanHahn"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "UlisesGascon"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "UlisesGascon"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "UlisesGascon"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "UlisesGascon"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "UlisesGascon"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "inigomarquinez"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "jonchurch"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "blakeembrey"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "UlisesGascon"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "jonchurch"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "jonchurch"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "jonchurch"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "jonchurch"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "marco-ippolito"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "marco-ippolito"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "marco-ippolito"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "marco-ippolito"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "marco-ippolito"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "marco-ippolito"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "marco-ippolito"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       },
+       {
+        "author": {
+         "email": "scrubbed@example.com",
+         "user": {
+          "login": "wesleytodd"
+         }
+        }
+       }
+      ]
+     },
+     "c12": {
+      "totalCount": 122
+     },
+     "c3": {
+      "totalCount": 47
+     },
+     "c6": {
+      "totalCount": 72
+     },
+     "cprev6": {
+      "totalCount": 50
+     },
+     "last": {
+      "nodes": [
+       {
+        "committedDate": "2024-09-30T20:49:26Z"
+       }
+      ]
+     }
+    }
+   }
+  },
+  "r0_closed": {
+   "issueCount": 92
+  },
+  "r0_oldprs": {
+   "issueCount": 1381
+  },
+  "r0_oldprs_closed": {
+   "issueCount": 1328
+  },
+  "r0_opened": {
+   "issueCount": 68
+  },
+  "r1": {
+   "archivedAt": null,
+   "createdAt": "2011-01-23T01:25:14Z",
+   "defaultBranchRef": {
+    "target": {
+     "authors": {
+      "nodes": []
+     },
+     "c12": {
+      "totalCount": 0
+     },
+     "c3": {
+      "totalCount": 0
+     },
+     "c6": {
+      "totalCount": 0
+     },
+     "cprev6": {
+      "totalCount": 0
+     },
+     "last": {
+      "nodes": [
+       {
+        "committedDate": "2020-02-11T23:39:46Z"
+       }
+      ]
+     }
+    }
+   }
+  },
+  "r1_closed": {
+   "issueCount": 0
+  },
+  "r1_oldprs": {
+   "issueCount": 1171
+  },
+  "r1_oldprs_closed": {
+   "issueCount": 1145
+  },
+  "r1_opened": {
+   "issueCount": 7
+  },
+  "r2": null,
+  "r2_closed": {
+   "issueCount": 0
+  },
+  "r2_oldprs": {
+   "issueCount": 0
+  },
+  "r2_oldprs_closed": {
+   "issueCount": 0
+  },
+  "r2_opened": {
+   "issueCount": 0
+  },
+  "rateLimit": {
+   "cost": 1,
+   "remaining": 4999,
+   "resetAt": "2026-11-01T06:45:30Z"
+  }
+ },
+ "errors": [
+  {
+   "locations": [
+    {
+     "column": 3,
+     "line": 38
+    }
+   ],
+   "message": "Could not resolve to a Repository with the name 'nobody-xyz/does-not-exist-xyz'.",
+   "path": [
+    "r2"
+   ],
+   "type": "NOT_FOUND"
+  }
+ ]
+}

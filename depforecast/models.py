@@ -65,3 +65,38 @@ class NpmPackage(BaseModel):
 
     def releases_before(self, as_of: datetime) -> list[Release]:
         return [r for r in self.releases if r.published < as_of]
+
+
+class RepoActivity(BaseModel):
+    """GitHub facts about a repo strictly before `as_of`. Used for features."""
+
+    repo: str
+    as_of: datetime
+    found: bool = True
+    created_at: datetime | None = None
+    archived_by_as_of: bool = False
+    """Archived on or before as_of. The archive date itself is never exposed here."""
+    commits_3m: int = 0
+    commits_6m: int = 0
+    commits_12m: int = 0
+    commits_prev_6m: int = 0
+    """Commits in the 6 months before the last 6 months (12 to 6 months before as_of)."""
+    last_commit_at: datetime | None = None
+    issues_opened_6m: int = 0
+    issues_closed_6m: int = 0
+    stale_prs: int = 0
+    """PRs open at as_of that were created more than 90 days before it."""
+    author_commits: dict[str, int] = {}
+    """Commits per author among the latest (up to 100) commits in the 12 months before as_of.
+    Keys are GitHub logins or hashed emails, never raw emails."""
+
+
+class RepoOutcome(BaseModel):
+    """What happened to a repo during an outcome window [start, end). Used for labels only."""
+
+    repo: str
+    start: datetime
+    end: datetime
+    found: bool = True
+    archived_in_window: bool = False
+    commits_in_window: int = 0

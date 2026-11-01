@@ -1,0 +1,45 @@
+{
+ "data": {
+  "r0": {
+   "archivedAt": null,
+   "defaultBranchRef": {
+    "target": {
+     "window": {
+      "totalCount": 101
+     }
+    }
+   }
+  },
+  "r1": {
+   "archivedAt": null,
+   "defaultBranchRef": {
+    "target": {
+     "window": {
+      "totalCount": 0
+     }
+    }
+   }
+  },
+  "r2": null,
+  "rateLimit": {
+   "cost": 1,
+   "remaining": 4998,
+   "resetAt": "2026-11-01T06:41:53Z"
+  }
+ },
+ "errors": [
+  {
+   "locations": [
+    {
+     "column": 3,
+     "line": 14
+    }
+   ],
+   "message": "Could not resolve to a Repository with the name 'nobody-xyz/does-not-exist-xyz'.",
+   "path": [
+    "r2"
+   ],
+   "type": "NOT_FOUND"
+  }
+ ]
+}
