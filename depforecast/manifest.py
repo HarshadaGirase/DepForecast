@@ -45,7 +45,11 @@ def _resolve(name: str, spec: str) -> tuple[str, str] | None:
 
 def read_package_json(path: Path) -> list[Dependency]:
     """Direct dependencies from package.json, de-duplicated by name."""
-    data = _load_json(path)
+    return parse_package_json(_load_json(path))
+
+
+def parse_package_json(data: dict[str, Any]) -> list[Dependency]:
+    """Direct dependencies from already-parsed package.json contents."""
     deps: dict[str, Dependency] = {}
     for kind in _SECTIONS:
         section = data.get(kind.value) or {}
