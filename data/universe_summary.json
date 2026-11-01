@@ -1,0 +1,14 @@
+{
+  "generated": "2026-11-01",
+  "seeds": 250,
+  "distinct_dependencies": 5118,
+  "github_packages": 4481,
+  "repos": 3719,
+  "monorepos": 209,
+  "skipped": {
+    "excluded scope (@types/*)": 443,
+    "no repository field": 85,
+    "repository not on GitHub": 56,
+    "not found on npm": 53
+  }
+}
