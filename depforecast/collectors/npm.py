@@ -1,5 +1,6 @@
 """npm registry collector: versions, publish dates, deprecated flag, repo URL, funding."""
 
+import json
 import re
 from datetime import datetime
 from typing import Any
@@ -100,9 +101,32 @@ def parse_packument(doc: dict[str, Any]) -> NpmPackage:
     )
 
 
+_VERSION_FIELDS = ("repository", "funding", "deprecated")
+
+
+def trim_packument(doc: dict[str, Any]) -> dict[str, Any]:
+    """Keep only the fields parse_packument reads. Full packuments can be many MB."""
+    versions = doc.get("versions") or {}
+    return {
+        "name": doc.get("name"),
+        "dist-tags": doc.get("dist-tags"),
+        "time": doc.get("time"),
+        "repository": doc.get("repository"),
+        "versions": {
+            version: {k: info[k] for k in _VERSION_FIELDS if k in info}
+            for version, info in versions.items()
+            if isinstance(info, dict)
+        },
+    }
+
+
+def _trim_text(text: str) -> str:
+    return json.dumps(trim_packument(json.loads(text)), separators=(",", ":"))
+
+
 def fetch_package(http: HttpClient, name: str) -> NpmPackage | None:
     """Registry metadata for one package, or None if it does not exist on npm."""
-    resp = http.get(package_url(name))
+    resp = http.get(package_url(name), transform=_trim_text)
     if resp.status == 404:
         return None
     if resp.status != 200:

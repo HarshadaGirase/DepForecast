@@ -150,3 +150,13 @@ def test_token_header_sent_but_not_cached(tmp_path: Path) -> None:
     assert route.calls[0].request.headers["Authorization"] == "bearer SECRET123"
     for f in (tmp_path / "http").rglob("*.json"):
         assert "SECRET123" not in f.read_text()
+
+
+@respx.mock
+def test_transform_applies_before_caching(tmp_path: Path) -> None:
+    route = respx.get(URL).respond(text="RAW BODY")
+    client = _client(tmp_path, FakeSleep())
+    first = client.get(URL, transform=str.lower)
+    second = client.get(URL, transform=str.lower)
+    assert first.text == second.text == "raw body"
+    assert second.from_cache and route.call_count == 1

@@ -142,3 +142,25 @@ def test_fetch_package_and_404(tmp_path: Path) -> None:
     pkg = fetch_package(http, "express")
     assert pkg is not None and pkg.repo == "expressjs/express"
     assert fetch_package(http, "no-such-pkg-xyz") is None
+
+
+def test_trim_keeps_everything_the_parser_needs() -> None:
+    from depforecast.collectors.npm import trim_packument
+
+    doc = _load("express")
+    doc["readme"] = "x" * 100_000  # big fields we never use
+    doc["versions"]["4.18.2"]["dist"] = {"tarball": "https://example.com/x.tgz"}
+    trimmed = trim_packument(doc)
+    assert parse_packument(trimmed) == parse_packument(doc)
+    assert "readme" not in trimmed
+    assert "dist" not in trimmed["versions"]["4.18.2"]
+
+
+@respx.mock
+def test_fetch_package_caches_trimmed_body(tmp_path: Path) -> None:
+    doc = _load("express")
+    doc["readme"] = "README " * 10_000
+    respx.get(package_url("express")).respond(json=doc)
+    fetch_package(HttpClient(HttpCache(tmp_path)), "express")
+    cached = HttpCache(tmp_path).get("GET", package_url("express"))
+    assert cached is not None and "readme" not in cached.json()

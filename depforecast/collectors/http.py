@@ -58,9 +58,13 @@ class HttpClient:
         self._client.close()
 
     def get(
-        self, url: str, headers: dict[str, str] | None = None, max_age: timedelta | None = None
+        self,
+        url: str,
+        headers: dict[str, str] | None = None,
+        max_age: timedelta | None = None,
+        transform: Callable[[str], str] | None = None,
     ) -> Response:
-        return self.request("GET", url, None, headers, max_age)
+        return self.request("GET", url, None, headers, max_age, transform=transform)
 
     def post(
         self,
@@ -80,11 +84,14 @@ class HttpClient:
         headers: dict[str, str] | None = None,
         max_age: timedelta | None = None,
         cache_if: Callable[[Response], bool] | None = None,
+        transform: Callable[[str], str] | None = None,
     ) -> Response:
         """Serve from cache, or fetch with retries. Only 200 responses are cached.
 
         `cache_if` can veto caching a 200 response (e.g. a GraphQL body with errors).
-        Headers are never part of the cache key, so tokens never reach the disk.
+        `transform` rewrites a 200 body before it is cached and returned (e.g. to keep
+        only the fields we use). Headers are never part of the cache key, so tokens
+        never reach the disk.
         """
         cached = self.cache.get(method, url, body, max_age)
         if cached is not None:
@@ -104,9 +111,9 @@ class HttpClient:
 
             self._note_rate_limit(resp)
             if resp.status_code == 200:
-                result = Response(200, resp.text)
+                result = Response(200, transform(resp.text) if transform else resp.text)
                 if cache_if is None or cache_if(result):
-                    self.cache.put(method, url, body, 200, resp.text)
+                    self.cache.put(method, url, body, 200, result.text)
                 return result
 
             wait = self._retry_wait(resp, attempt)
